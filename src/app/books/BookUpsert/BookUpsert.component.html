@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar Libro' : 'Agregar Libro' }}</h2>
+<form [formGroup]="bookForm" (ngSubmit)="save()">
+  <mat-dialog-content>
+    <!-- Campo ID -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" placeholder="ID del libro" />
+      <mat-error *ngIf="bookForm.get('id')?.hasError('required')">
+        El ID es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Nombre -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Nombre del libro" />
+      <mat-error *ngIf="bookForm.get('name')?.hasError('required')">
+        El nombre es obligatorio.
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <!-- Botones de acción -->
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="bookForm.invalid">
+      Guardar
+    </button>
+  </mat-dialog-actions>
+</form>
